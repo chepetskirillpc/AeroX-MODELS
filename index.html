@@ -1,0 +1,438 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AeroX | Miniature Aircraft Store</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top aero-navbar">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">
+        <i class="ti ti-plane-tilt brand-icon"></i> AeroX
+      </a>
+
+      <button class="navbar-toggler" type="button"
+        data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+        aria-controls="navbarMenu" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#models">Models</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item">
+            <button class="btn cart-button" data-bs-toggle="offcanvas"
+              data-bs-target="#cartPanel" aria-controls="cartPanel">
+              <i class="ti ti-shopping-cart"></i>
+              Cart <span id="cartCount" class="cart-count">0</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home" class="hero-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <span class="eyebrow">
+            <i class="ti ti-sparkles"></i> PRECISION IN EVERY DETAIL
+          </span>
+
+          <h1>Great aircraft.<br><span>Miniature scale.</span></h1>
+
+          <p class="hero-description">
+            Discover beautifully crafted miniature aircraft models
+            made for collectors, aviation fans, and dreamers.
+          </p>
+
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#models" class="btn btn-aero btn-lg">
+              Explore models <i class="ti ti-arrow-up-right"></i>
+            </a>
+            <a href="#about" class="btn btn-outline-light btn-lg">
+              Our story
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div>
+              <strong>1:72</strong>
+              <span>Scale details</span>
+            </div>
+            <div>
+              <strong>Premium</strong>
+              <span>Craftsmanship</span>
+            </div>
+            <div>
+              <strong>Worldwide</strong>
+              <span>Collector spirit</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="hero-art">
+            <div class="hero-glow"></div>
+            <div class="hero-image-wrap">
+              <img src="assets/hero-plane.png"
+                alt="Featured miniature aircraft model"
+                class="hero-image"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+              <div class="plane-placeholder">
+                <i class="ti ti-plane-tilt"></i>
+                <span>YOUR HERO AIRCRAFT IMAGE</span>
+                <small>Add your image at assets/hero-plane.png</small>
+              </div>
+            </div>
+
+            <div class="floating-label label-top">
+              <i class="ti ti-award"></i>
+              <span>Collector's choice</span>
+            </div>
+
+            <div class="floating-label label-bottom">
+              <i class="ti ti-shield-check"></i>
+              <span>Made for enthusiasts</span>
+            </div>
+
+            <div class="hero-orbit"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features -->
+  <section class="feature-strip">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature-item">
+            <i class="ti ti-plane"></i>
+            <div>
+              <h3>Authentic designs</h3>
+              <p>Inspired by iconic aircraft.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-item">
+            <i class="ti ti-package"></i>
+            <div>
+              <h3>Collector ready</h3>
+              <p>Made to display and admire.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-item">
+            <i class="ti ti-heart-handshake"></i>
+            <div>
+              <h3>Built for enthusiasts</h3>
+              <p>For every generation of aviation fans.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="models" class="products-section section-padding">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">THE COLLECTION</span>
+          <h2>Find your <span>next model.</span></h2>
+          <p>Explore a collection inspired by aviation legends.</p>
+        </div>
+      </div>
+
+      <div class="shop-controls">
+        <div class="filter-buttons" aria-label="Filter products">
+          <button class="filter-btn active" data-filter="all">All models</button>
+          <button class="filter-btn" data-filter="commercial">Commercial</button>
+          <button class="filter-btn" data-filter="military">Military</button>
+          <button class="filter-btn" data-filter="classic">Classic</button>
+        </div>
+
+        <label class="search-box">
+          <i class="ti ti-search"></i>
+          <input type="search" id="productSearch"
+            placeholder="Search aircraft..." aria-label="Search aircraft">
+        </label>
+      </div>
+
+      <div class="row g-4" id="productGrid">
+
+        <div class="col-sm-6 col-lg-4 product-column"
+          data-category="commercial" data-name="airbus a320">
+          <article class="product-card">
+            <div class="product-image">
+              <span class="product-tag">Bestseller</span>
+              <img src="assets/airbus-a320.png" alt="Airbus A320 model"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="image-placeholder">
+                <i class="ti ti-plane"></i><span>AIRBUS A320</span>
+              </div>
+              <button class="quick-add" data-add="1" aria-label="Add Airbus A320 to cart">
+                <i class="ti ti-plus"></i>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">COMMERCIAL AIRCRAFT</span>
+              <h3>Airbus A320</h3>
+              <p>Modern passenger aircraft replica.</p>
+              <div class="product-bottom">
+                <strong>€34.90</strong>
+                <button class="btn-add" data-add="1">Add to cart <i class="ti ti-arrow-right"></i></button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-sm-6 col-lg-4 product-column"
+          data-category="military" data-name="f-16 fighting falcon">
+          <article class="product-card">
+            <div class="product-image">
+              <span class="product-tag">Popular</span>
+              <img src="assets/f16.png" alt="F-16 model"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="image-placeholder">
+                <i class="ti ti-plane-tilt"></i><span>F-16 FIGHTING FALCON</span>
+              </div>
+              <button class="quick-add" data-add="2" aria-label="Add F-16 to cart">
+                <i class="ti ti-plus"></i>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">MILITARY AIRCRAFT</span>
+              <h3>F-16 Fighting Falcon</h3>
+              <p>A legendary modern fighter replica.</p>
+              <div class="product-bottom">
+                <strong>€42.50</strong>
+                <button class="btn-add" data-add="2">Add to cart <i class="ti ti-arrow-right"></i></button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-sm-6 col-lg-4 product-column"
+          data-category="classic" data-name="spitfire mk ix">
+          <article class="product-card">
+            <div class="product-image">
+              <img src="assets/spitfire.png" alt="Spitfire model"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="image-placeholder">
+                <i class="ti ti-plane"></i><span>SPITFIRE MK IX</span>
+              </div>
+              <button class="quick-add" data-add="3" aria-label="Add Spitfire to cart">
+                <i class="ti ti-plus"></i>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">CLASSIC AIRCRAFT</span>
+              <h3>Spitfire Mk IX</h3>
+              <p>A timeless icon of aviation history.</p>
+              <div class="product-bottom">
+                <strong>€29.90</strong>
+                <button class="btn-add" data-add="3">Add to cart <i class="ti ti-arrow-right"></i></button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-sm-6 col-lg-4 product-column"
+          data-category="commercial" data-name="boeing 747">
+          <article class="product-card">
+            <div class="product-image">
+              <img src="assets/boeing-747.png" alt="Boeing 747 model"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="image-placeholder">
+                <i class="ti ti-plane"></i><span>BOEING 747</span>
+              </div>
+              <button class="quick-add" data-add="4" aria-label="Add Boeing 747 to cart">
+                <i class="ti ti-plus"></i>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">COMMERCIAL AIRCRAFT</span>
+              <h3>Boeing 747</h3>
+              <p>The iconic jumbo jet for your collection.</p>
+              <div class="product-bottom">
+                <strong>€49.90</strong>
+                <button class="btn-add" data-add="4">Add to cart <i class="ti ti-arrow-right"></i></button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-sm-6 col-lg-4 product-column"
+          data-category="military" data-name="p-51 mustang">
+          <article class="product-card">
+            <div class="product-image">
+              <img src="assets/p51-mustang.png" alt="P-51 Mustang model"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="image-placeholder">
+                <i class="ti ti-plane-tilt"></i><span>P-51 MUSTANG</span>
+              </div>
+              <button class="quick-add" data-add="5" aria-label="Add P-51 Mustang to cart">
+                <i class="ti ti-plus"></i>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">MILITARY AIRCRAFT</span>
+              <h3>P-51 Mustang</h3>
+              <p>A classic fighter with unmistakable style.</p>
+              <div class="product-bottom">
+                <strong>€31.50</strong>
+                <button class="btn-add" data-add="5">Add to cart <i class="ti ti-arrow-right"></i></button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-sm-6 col-lg-4 product-column"
+          data-category="classic" data-name="cessna 172 skyhawk">
+          <article class="product-card">
+            <div class="product-image">
+              <span class="product-tag">New arrival</span>
+              <img src="assets/cessna-172.png" alt="Cessna 172 model"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="image-placeholder">
+                <i class="ti ti-plane"></i><span>CESSNA 172</span>
+              </div>
+              <button class="quick-add" data-add="6" aria-label="Add Cessna 172 to cart">
+                <i class="ti ti-plus"></i>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">CLASSIC AIRCRAFT</span>
+              <h3>Cessna 172 Skyhawk</h3>
+              <p>A beloved general aviation aircraft.</p>
+              <div class="product-bottom">
+                <strong>€24.90</strong>
+                <button class="btn-add" data-add="6">Add to cart <i class="ti ti-arrow-right"></i></button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+
+      <p id="noProducts" class="no-products" hidden>
+        No aircraft match your search.
+      </p>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about-section section-padding">
+    <div class="container">
+      <div class="about-panel">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-8">
+            <span class="eyebrow">THE AEROX SPIRIT</span>
+            <h2>Small models.<br><span>Big aviation dreams.</span></h2>
+            <p>
+              AeroX celebrates the aircraft that changed the way we see the
+              world. Find a model that tells a story and gives your collection
+              a new point of view.
+            </p>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <a href="https://chepetskirillpc.github.io/Aero-X/"
+              target="_blank" rel="noopener noreferrer"
+              class="btn btn-aero btn-lg">
+              Visit original AeroX <i class="ti ti-external-link"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container d-flex flex-column flex-md-row justify-content-between gap-3">
+      <a class="footer-brand" href="#home"><i class="ti ti-plane-tilt"></i> AeroX</a>
+      <p>Made for people who look up.</p>
+      <span>© <span id="currentYear"></span> AeroX Miniature Aircraft</span>
+    </div>
+  </footer>
+
+  <!-- Cart drawer -->
+  <div class="offcanvas offcanvas-end cart-panel" tabindex="-1"
+    id="cartPanel" aria-labelledby="cartTitle">
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title" id="cartTitle">
+        <i class="ti ti-shopping-cart"></i> Your cart
+      </h2>
+      <button type="button" class="btn-close btn-close-white"
+        data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body">
+      <div id="cartItems"></div>
+
+      <div id="cartEmpty" class="cart-empty">
+        <i class="ti ti-shopping-bag"></i>
+        <h3>Your cart is empty</h3>
+        <p>Find your next favourite aircraft.</p>
+        <button class="btn btn-aero" data-bs-dismiss="offcanvas">Explore models</button>
+      </div>
+
+      <div id="cartSummary" hidden>
+        <div class="cart-total">
+          <span>Subtotal</span>
+          <strong id="cartTotal">€0.00</strong>
+        </div>
+        <p class="cart-note">Demo store: checkout is not connected to payments.</p>
+        <button id="checkoutButton" class="btn btn-aero w-100">
+          <i class="ti ti-lock"></i> Demo checkout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="shopToast" class="toast shop-toast" role="status" aria-live="polite">
+      <div class="d-flex align-items-center">
+        <div class="toast-body">
+          <i class="ti ti-circle-check"></i>
+          <span id="toastMessage">Added to cart</span>
+        </div>
+        <button type="button" class="btn-close btn-close-white me-3"
+          data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom JS -->
+  <script src="script.js"></script>
+</body>
+</html>
