@@ -224,3 +224,10 @@ document.getElementById("checkoutButton").addEventListener("click", () => {
 
 // Initial render
 renderCart();
+
+const cartPanel = document.querySelector("#cartPanel");
+
+cartPanel.addEventListener("click", () => {
+    gtag('event', 'cart_views')
+    console.log('Cart panel viewed');
+});
