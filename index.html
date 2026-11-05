@@ -414,6 +414,16 @@
       </div>
 
       <div id="cartSummary" hidden>
+        <div id="discountBadge" class="discount-badge" hidden>
+          <div class="discount-badge-info">
+              <i class="ti ti-discount-2"></i>
+            <span><strong>10% Off</strong> applied</span>
+          </div>
+          <button id="removeDiscountBtn" type="button" class="btn-remove-discount" aria-label="Remove discount">
+            <i class="ti ti-x"></i>
+          </button>
+        </div>
+
         <div class="cart-total">
           <span>Subtotal</span>
           <strong id="cartTotal">€0.00</strong>
@@ -439,6 +449,19 @@
       </div>
     </div>
   </div>
+
+
+<!-- Custom Discount Modal -->
+<div id="discountModal" class="custom-modal-overlay" hidden>
+  <div class="custom-modal-card">
+    <div class="modal-icon-wrap">
+      <i class="ti ti-discount-2"></i>
+    </div>
+    <h3>Discount Unlocked!</h3>
+    <p>You now get a <strong>10% discount</strong> on everything in your cart.</p>
+    <button id="closeDiscountModal" class="btn btn-aero w-100">Awesome, thanks!</button>
+  </div>
+</div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

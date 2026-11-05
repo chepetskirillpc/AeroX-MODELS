@@ -8,7 +8,17 @@ const products = [
   { id: 6, name: "Cessna 172 Skyhawk", price: 24.90, category: "classic" }
 ];
 
-const cart = new Map();
+// State tracking
+let isDiscountApplied = getJsonCookie("aerox_discount") || false;
+
+// Load initial cart from JSON cookie if present
+const savedCartArray = getJsonCookie("aerox_cart");
+const cart = new Map(savedCartArray || []);
+
+// Helper function to save cart state to JSON cookie
+function saveCartState() {
+  saveJsonCookie("aerox_cart", Array.from(cart.entries()));
+}
 
 let activeCategory = "all";
 
@@ -28,6 +38,82 @@ const shopToast = bootstrap.Toast.getOrCreateInstance(toastElement);
 document.getElementById("currentYear").textContent =
   new Date().getFullYear();
 
+
+
+// Cookie Helpers
+function setCookie(name, value, days = 7) {
+  const date = new Date();
+  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+  const expires = "expires=" + date.toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; ${expires}; path=/; SameSite=Lax`;
+}
+
+function getCookie(name) {
+  const nameEQ = name + "=";
+  const ca = document.cookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i].trim();
+    if (c.indexOf(nameEQ) === 0) {
+      return decodeURIComponent(c.substring(nameEQ.length));
+    }
+  }
+  return null;
+}
+
+function saveJsonCookie(name, data, days = 7) {
+  setCookie(name, JSON.stringify(data), days);
+}
+
+function getJsonCookie(name) {
+  const jsonString = getCookie(name);
+  if (!jsonString) return null;
+  try {
+    return JSON.parse(jsonString);
+  } catch (e) {
+    return null;
+  }
+}
+
+
+// Add modal DOM elements at the top where other elements are initialized
+const discountModal = document.getElementById("discountModal");
+const closeDiscountModalBtn = document.getElementById("closeDiscountModal");
+
+// Close modal event handler
+closeDiscountModalBtn.addEventListener("click", () => {
+  discountModal.hidden = true;
+});
+
+// Also close if user clicks outside the modal card (on the blurred backdrop)
+discountModal.addEventListener("click", (e) => {
+  if (e.target === discountModal) {
+    discountModal.hidden = true;
+  }
+});
+
+// Update your keydown event listener to trigger the custom modal instead of alert()
+document.addEventListener("keydown", (event) => {
+  // Ignore key press if user is typing inside search or form input fields
+  const activeElement = document.activeElement;
+  if (activeElement.tagName === "INPUT" || activeElement.tagName === "TEXTAREA") {
+    return;
+  }
+
+  if (event.key === "a" || event.key === "A") {
+    if (!isDiscountApplied) {
+      isDiscountApplied = true;
+      saveJsonCookie("aerox_discount", true);
+      
+      // Show custom popup modal
+      discountModal.hidden = false;
+      
+      renderCart();
+    } else {
+      showToast("10% discount is already active!");
+    }
+  }
+});
+
 function formatPrice(price) {
   return new Intl.NumberFormat("de-DE", {
     style: "currency",
@@ -42,12 +128,12 @@ function showToast(message) {
 
 function addToCart(productId) {
   const product = products.find(item => item.id === productId);
-
   if (!product) return;
 
   const currentQuantity = cart.get(productId) || 0;
   cart.set(productId, currentQuantity + 1);
 
+  saveCartState(); // Save changes
   renderCart();
   showToast(`${product.name} added to cart`);
 }
@@ -62,6 +148,7 @@ function changeQuantity(productId, change) {
     cart.set(productId, newQuantity);
   }
 
+  saveCartState(); // Save changes
   renderCart();
 }
 
@@ -69,6 +156,7 @@ function removeFromCart(productId) {
   const product = products.find(item => item.id === productId);
 
   cart.delete(productId);
+  saveCartState(); // Save changes
   renderCart();
 
   if (product) {
@@ -76,18 +164,38 @@ function removeFromCart(productId) {
   }
 }
 
+// Additional DOM Elements
+const discountBadge = document.getElementById("discountBadge");
+const removeDiscountBtn = document.getElementById("removeDiscountBtn");
+
+// Remove Discount Handler
+removeDiscountBtn.addEventListener("click", () => {
+  isDiscountApplied = false;
+  saveJsonCookie("aerox_discount", false);
+  renderCart();
+  showToast("10% discount removed");
+});
+
+// Updated renderCart()
 function renderCart() {
   let itemCount = 0;
   let subtotal = 0;
 
   cart.forEach((quantity, productId) => {
     const product = products.find(item => item.id === productId);
-
     if (!product) return;
 
     itemCount += quantity;
     subtotal += product.price * quantity;
   });
+
+  // Toggle discount badge visibility based on state
+  if (discountBadge) {
+    discountBadge.hidden = !isDiscountApplied;
+  }
+
+  // Calculate final subtotal with discount if active
+  const finalSubtotal = isDiscountApplied ? subtotal * 0.90 : subtotal;
 
   cartCount.textContent = itemCount;
   cartItems.innerHTML = "";
@@ -97,8 +205,9 @@ function renderCart() {
 
   cart.forEach((quantity, productId) => {
     const product = products.find(item => item.id === productId);
-
     if (!product) return;
+
+    const itemPrice = isDiscountApplied ? product.price * 0.90 : product.price;
 
     const item = document.createElement("div");
     item.className = "cart-item";
@@ -110,7 +219,7 @@ function renderCart() {
 
     const price = document.createElement("div");
     price.className = "cart-item-price";
-    price.textContent = formatPrice(product.price * quantity);
+    price.textContent = formatPrice(itemPrice * quantity);
 
     const quantityControls = document.createElement("div");
     quantityControls.className = "quantity-controls";
@@ -151,7 +260,7 @@ function renderCart() {
     cartItems.appendChild(item);
   });
 
-  cartTotal.textContent = formatPrice(subtotal);
+  cartTotal.textContent = formatPrice(finalSubtotal);
 }
 
 function createIconButton(iconClass, label, callback) {
