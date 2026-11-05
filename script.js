@@ -106,6 +106,10 @@ document.addEventListener("keydown", (event) => {
       
       // Show custom popup modal
       discountModal.hidden = false;
+
+      //gtag event for discount applied
+      gtag('event', '10%-discount-applied');
+      console.log('10% discount applied!');
       
       renderCart();
     } else {
