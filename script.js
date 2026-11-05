@@ -5,7 +5,8 @@ const products = [
   { id: 3, name: "Spitfire Mk IX", price: 29.90, category: "classic" },
   { id: 4, name: "Boeing 747", price: 49.90, category: "commercial" },
   { id: 5, name: "P-51 Mustang", price: 31.50, category: "military" },
-  { id: 6, name: "Cessna 172 Skyhawk", price: 24.90, category: "classic" }
+  { id: 6, name: "Cessna 172 Skyhawk", price: 24.90, category: "classic" },
+  { id: 7, name: "Airbus A380", price: 63.80, category: "commercial" },
 ];
 
 // State tracking
